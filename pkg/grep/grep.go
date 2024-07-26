@@ -10,10 +10,10 @@ import (
 func GrepParameters(urls []string, configs []config.Data) {
     for _, rawURL := range urls {
         params := extractParameters(rawURL)
-		fmt.Println("params: ", params)
+		
         for _, cfg := range configs {
             for _, param := range cfg.Parameters {
-				fmt.Println("param: ", param)
+				
                 if _, exists := params[param]; exists {
                     fmt.Println(param)
                 }
