@@ -1,0 +1,8 @@
+BugType: "XSS"
+
+Parameters:
+  - "q"
+  - "search"
+  - "lang"
+  - "keyword"
+  - "query"
