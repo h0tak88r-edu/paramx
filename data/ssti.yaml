@@ -1,0 +1,10 @@
+BugType: "SSTI"
+Parameters:
+ - activity
+  - content
+  - id
+  - name
+  - preview
+  - redirect
+  - template
+  - view
