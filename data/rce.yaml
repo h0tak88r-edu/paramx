@@ -1,5 +1,5 @@
-BugType: "RCE"
-Parameters:
+bug_type: "RCE"
+parameters:
   - arg
   - cli
   - cmd

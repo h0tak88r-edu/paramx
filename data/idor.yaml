@@ -1,6 +1,6 @@
-BugType: "IDOR"
+bug_type: "IDOR"
 
-Parameters:
+parameters:
   - account
   - doc
   - edit

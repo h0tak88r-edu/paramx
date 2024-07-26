@@ -1,6 +1,6 @@
-BugType: "XSS"
+bug_type: "XSS"
 
-Parameters:
+parameters:
   - api
   - api_key
   - begindate

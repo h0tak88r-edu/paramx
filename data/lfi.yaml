@@ -1,5 +1,5 @@
-BugType: "LFI"
-Parameters:
+bug_type: "LFI"
+parameters:
   - action
   - board
   - cat

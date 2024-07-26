@@ -26,8 +26,8 @@ type Data struct {
     Parameters []string `yaml:"Parameters"`
 }
 
-func LoadConfig(configDir string) ([]Data, error) {
-    var configs []Data
+func LoadConfig(configDir string) ([]*Data, error) {
+    var configs []*Data
 
     files, err := os.ReadDir(configDir)
     if err != nil {
@@ -48,7 +48,7 @@ func LoadConfig(configDir string) ([]Data, error) {
                 continue
             }
 
-            configs = append(configs, data)
+            configs = append(configs, &data)
         }
     }
 

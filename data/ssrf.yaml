@@ -1,6 +1,6 @@
-BugType: "SSRF"
+bug_type: "SSRF"
 
-Parameters:
+parameters:
   - access
   - adm
   - admin

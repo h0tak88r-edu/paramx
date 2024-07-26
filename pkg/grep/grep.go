@@ -3,20 +3,23 @@ package grep
 import (
 	"fmt"
 	"net/url"
+	"strings"
 
 	"paramx/internal/config"
 )
 
-func GrepParameters(urls []string, configs []config.Data) {
+func GrepParameters(urls []string, configs []*config.Data, bugType string) {
     for _, rawURL := range urls {
         params := extractParameters(rawURL)
 		
         for _, cfg := range configs {
             for _, param := range cfg.Parameters {
-				
-                if _, exists := params[param]; exists {
-                    fmt.Println(param)
-                }
+
+				if strings.EqualFold(cfg.BugType, bugType) {	
+                	if _, exists := params[param]; exists {
+                   		fmt.Println(param)
+                	}
+				}
             }
         }
     }

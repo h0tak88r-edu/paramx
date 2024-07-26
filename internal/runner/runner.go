@@ -5,10 +5,10 @@ import (
     "paramx/pkg/grep"
 )
 
-func Run(urls []string, configDir string) {
-    configs, err := config.LoadConfig(configDir)
+func Run(opts *Options) {
+    configs, err := config.LoadConfig(opts.ConfigPath)
     if err != nil {
         panic(err)
     }
-    grep.GrepParameters(urls, configs)
+    grep.GrepParameters(opts.URLs, configs, opts.BugType)
 }

@@ -1,5 +1,5 @@
-BugType: "SSTI"
-Parameters:
+bug_type: "SSTI"
+parameters:
  - activity
   - content
   - id

@@ -1,5 +1,5 @@
-BugType: "OpenRedirect"
-Parameters:
+bug_type: "Redirect"
+parameters:
   - Lmage_url: 
   - Open: 
   - callback: 
