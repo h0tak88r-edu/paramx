@@ -1,8 +1,40 @@
 BugType: "XSS"
 
 Parameters:
-  - "q"
-  - "search"
-  - "lang"
-  - "keyword"
-  - "query"
+  - api
+  - api_key
+  - begindate
+  - callback
+  - categoryid
+  - csrf_token
+  - emailto
+  - email
+  - enddate
+  - id
+  - immagine
+  - item
+  - jsonp
+  - key
+  - keyword
+  - keywords
+  - l
+  - lang
+  - list_type
+  - month
+  - name
+  - p
+  - page
+  - page_id
+  - password
+  - q
+  - query
+  - s
+  - search
+  - terms
+  - token
+  - type
+  - unsubscribe_token
+  - url
+  - username
+  - view
+  - year

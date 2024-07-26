@@ -1,0 +1,16 @@
+BugType: "IDOR"
+
+Parameters:
+  - account
+  - doc
+  - edit
+  - email
+  - group
+  - id
+  - key
+  - no
+  - number
+  - order
+  - profile
+  - report
+  - user

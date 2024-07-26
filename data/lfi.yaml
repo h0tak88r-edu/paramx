@@ -1,0 +1,35 @@
+BugType: "LFI"
+Parameters:
+  - action
+  - board
+  - cat
+  - conf
+  - content
+  - date
+  - detail
+  - dir
+  - doc
+  - document
+  - download
+  - file
+  - folder
+  - inc
+  - include
+  - layout
+  - locate
+  - mod
+  - name
+  - page
+  - path
+  - pdf
+  - pg
+  - php_path
+  - prefix
+  - root
+  - show
+  - site
+  - style
+  - template
+  - type
+  - url
+  - view
