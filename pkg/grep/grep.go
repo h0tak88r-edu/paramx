@@ -9,11 +9,16 @@ import (
 )
 
 func GrepParameters(urls []string, configs []*config.Data, bugType string) {
-    for _, rawURL := range urls {
+   
+	fmt.Println("BugType: ", bugType)
+	
+	for _, rawURL := range urls {
         params := extractParameters(rawURL)
 		
         for _, cfg := range configs {
+			fmt.Println("BugType: ", cfg.BugType)
             for _, param := range cfg.Parameters {
+		
 
 				if strings.EqualFold(cfg.BugType, bugType) {	
                 	if _, exists := params[param]; exists {

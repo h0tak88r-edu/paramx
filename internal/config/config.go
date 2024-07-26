@@ -8,6 +8,9 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
+// var homeDir, _ = os.UserHomeDir()
+// var ConfigPath = filepath.Join(homeDir, ".config", "paramx", "config")
+
 type Bug int8
 
 const (
@@ -22,8 +25,8 @@ const (
 )
 
 type Data struct {
-    BugType    string   `yaml:"BugType"`
-    Parameters []string `yaml:"Parameters"`
+    BugType    string   `yaml:"bug_type"`
+    Parameters []string `yaml:"parameters"`
 }
 
 func LoadConfig(configDir string) ([]*Data, error) {
