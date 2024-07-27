@@ -9,4 +9,5 @@ type Options struct {
 	FileInput    string   // FileInput is the path to the input file.
 	ReplaceWith  string   // ReplaceWith is the string to replace the bug with.
 	CustomTemplete string // CustomTemplete is the path to the custom templete.
+	UpdateTempletes bool   // UpdateTempletes is a flag to update the templetes.
 }

@@ -20,6 +20,8 @@ func Run(opts *Options) {
         os.Exit(1)
     }
 
+    
+
     if opts.TempletesPath == "" {
         opts.TempletesPath = config.TempletesPath
     }
@@ -46,7 +48,6 @@ func Run(opts *Options) {
     default:
         grep.GrepParameters(opts.URLs, configs, opts.Tag, opts.ReplaceWith)
     }
-
 
     
 }

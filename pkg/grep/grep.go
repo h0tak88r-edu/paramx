@@ -35,11 +35,12 @@ func GrepParameters(urls []string, configs []*config.Data, tag, replaceWith stri
     tags := []string{}
 
     for _, cfg := range configs {
-        tags = append(tags, cfg.List...)
+        tags = append(tags, cfg.Tag)
     }
 
+
     if ! isTypeExist(tag, tags) {
-        logger.FATAL("Invalid bug type")
+        logger.FATAL("Invalid tag , please add a valid tag like (xss, ssrf, sqli, lfi, rce, idor, ssti, redirect, isubs)")
         os. Exit(1)
     }
 	
@@ -57,7 +58,7 @@ func GrepParameters(urls []string, configs []*config.Data, tag, replaceWith stri
 				if strings.EqualFold(cfg.Tag, tag) {
 
                 	if _, exists := params[param]; exists {
-                   		fmt.Println(param)
+                   		fmt.Println(rawURL)
                 	}
 				}
             }

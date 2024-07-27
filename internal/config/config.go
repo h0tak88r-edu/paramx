@@ -106,3 +106,13 @@ func ReadCustomTemplete(filePath string) (*Data, error) {
     return &data, nil
 
 }
+
+func UpdateTempletes () error {
+    cmd := exec.Command("git", "-C", TempletesPath, "pull")
+    err := cmd.Run()
+    if err != nil {
+        return err
+    }
+    logger.INFO("Param Templetes updated successfully.")
+    return nil
+}
