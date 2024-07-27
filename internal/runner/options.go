@@ -8,4 +8,5 @@ type Options struct {
 	BugType      string   // BugType is the type of bug to be injected.
 	FileInput    string   // FileInput is the path to the input file.
 	ReplaceWith  string   // ReplaceWith is the string to replace the bug with.
+	CustomTemplete string // CustomTemplete is the path to the custom templete.
 }

@@ -70,3 +70,25 @@ func LoadConfig(configDir string) ([]*Data, error) {
 
     return configs, nil
 }
+
+
+func ReadCustomTemplete(filePath string) (*Data, error) {
+
+    file, err := os.Open(filePath)
+    if err != nil {
+        return nil, err
+    }
+
+    defer file.Close()
+
+    var data Data
+
+    decoder := yaml.NewDecoder(file)
+
+    if err := decoder.Decode(&data); err != nil {
+        return nil, err
+    }
+
+    return &data, nil
+
+}

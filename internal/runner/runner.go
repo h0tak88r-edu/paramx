@@ -20,6 +20,8 @@ func Run(opts *Options) {
         os.Exit(1)
     }
 
+
+
     if opts.TempletesPath == "" {
         opts.TempletesPath = config.TempletesPath
     }
@@ -28,5 +30,18 @@ func Run(opts *Options) {
     if err != nil {
         panic(err)
     }
+
+    if opts.CustomTemplete != "" {
+        date, err :=  config.ReadCustomTemplete(opts.CustomTemplete)
+        if err != nil {
+            logger.ERROR("Error reading custom templete the syntax is invalid : %s\n", err.Error())
+            os.Exit(1)
+        }
+        configs = append(configs, date)
+
+    
+    }
+
+
     grep.GrepParameters(opts.URLs, configs, opts.BugType, opts.ReplaceWith)
 }
