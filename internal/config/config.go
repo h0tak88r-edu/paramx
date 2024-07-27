@@ -3,32 +3,45 @@ package config
 import (
 	"log"
 	"os"
+	"os/exec"
 	"path/filepath"
 
+	"github.com/zomasec/logz"
 	"gopkg.in/yaml.v3"
 )
 
-// var homeDir, _ = os.UserHomeDir()
-// var ConfigPath = filepath.Join(homeDir, ".config", "paramx", "config")
 
-type Bug int8
 
-const (
-    XSS Bug = iota
-    SSRF
-    IDOR
-    SQLI
-    SSTI
-    OpenRedirect
-    LFI
-    RCE
-)
+var logger = logz.DefaultLogs()
+
+var TempletesPath = filepath.Join(os.Getenv("HOME"), "paramx-templetes")
+
 
 type Data struct {
     BugType    string   `yaml:"bug_type"`
     Parameters []string `yaml:"parameters"`
 }
 
+// Check config path
+
+func DownloadTempletes() error {
+    if _, err := os.Stat(TempletesPath); os.IsNotExist(err) {
+        logger.INFO("Templates directory does not exist. Cloning repository...")
+        cmd := exec.Command("git", "clone", "https://github.com/zomasec/paramx-templetes.git", TempletesPath)
+        err := cmd.Run()
+        if err != nil {
+            return err
+        }
+        logger.INFO("Param Templetes installed successfully.")
+        return nil
+    }
+
+    return nil
+}
+
+// LoadConfig loads configuration files from the specified directory and returns a slice of Data objects.
+// It reads all files with the ".yaml" extension in the directory and unmarshals them into Data objects.
+// Any errors encountered during file reading or unmarshaling are logged, and the corresponding files are skipped.
 func LoadConfig(configDir string) ([]*Data, error) {
     var configs []*Data
 
