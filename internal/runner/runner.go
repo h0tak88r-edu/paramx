@@ -20,7 +20,7 @@ func Run(opts *Options) {
         os.Exit(1)
     }
 
-
+    
 
     if opts.TempletesPath == "" {
         opts.TempletesPath = config.TempletesPath
@@ -42,6 +42,12 @@ func Run(opts *Options) {
     
     }
 
+    switch opts.Tag {
+    case "isubs":
+        grep.GrepSubdomains(opts.URLs, configs)
+    default:
+        grep.GrepParameters(opts.URLs, configs, opts.Tag, opts.ReplaceWith)
+    }
 
-    grep.GrepParameters(opts.URLs, configs, opts.BugType, opts.ReplaceWith)
+    
 }

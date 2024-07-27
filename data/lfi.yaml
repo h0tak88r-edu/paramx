@@ -1,5 +1,7 @@
-bug_type: "LFI"
-parameters:
+tag: LFI
+part: query
+
+list:
   - action
   - board
   - cat

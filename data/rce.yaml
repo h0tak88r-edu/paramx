@@ -1,5 +1,7 @@
-bug_type: "RCE"
-parameters:
+tag: RCE
+part: query
+
+list:
   - arg
   - cli
   - cmd

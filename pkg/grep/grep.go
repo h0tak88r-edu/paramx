@@ -9,13 +9,14 @@ import (
 	"github.com/zomasec/logz"
 
 	"paramx/internal/config"
+	"paramx/pkg/types"
 )
 
 var logger = logz.DefaultLogs()
 
-func isTypeExist(bugType string, types []string) bool {
+func isTypeExist(tag string, types []string) bool {
   for _, t := range types {
-    if strings.EqualFold(t, bugType) {
+    if strings.EqualFold(t, tag) {
       return true
     }
   }
@@ -28,17 +29,18 @@ func isTypeExist(bugType string, types []string) bool {
 // The function takes in the following parameters:
 // - urls: A slice of strings representing the URLs to search for parameters.
 // - configs: A slice of *config.Data representing the configurations to use for parameter extraction.
-// - bugType: A string representing the bug type to search for.
+// - tag: A string representing the bug type to search for.
 // - replaceWith: A string representing the replacement value for the found parameters.
-func GrepParameters(urls []string, configs []*config.Data, bugType, replaceWith string) {
-    types := []string{}
+func GrepParameters(urls []string, configs []*config.Data, tag, replaceWith string) {
+    tags := []string{}
 
     for _, cfg := range configs {
-        types = append(types, cfg.BugType)
+        tags = append(tags, cfg.Tag)
     }
 
-    if ! isTypeExist(bugType, types) {
-        logger.FATAL("Invalid bug type")
+
+    if ! isTypeExist(tag, tags) {
+        logger.FATAL("Invalid tag , please add a valid tag like (xss, ssrf, sqli, lfi, rce, idor, ssti, redirect, isubs)")
         os. Exit(1)
     }
 	
@@ -46,13 +48,17 @@ func GrepParameters(urls []string, configs []*config.Data, bugType, replaceWith 
         params := extractParameters(rawURL, replaceWith)
 		
         for _, cfg := range configs {
+
+            if !(cfg.Part == types.Query.String()) {
+                continue        
+            }
 			
-            for _, param := range cfg.Parameters {
+            for _, param := range cfg.List {
 		
-				if strings.EqualFold(cfg.BugType, bugType) {
+				if strings.EqualFold(cfg.Tag, tag) {
 
                 	if _, exists := params[param]; exists {
-                   		fmt.Println(param)
+                   		fmt.Println(rawURL)
                 	}
 				}
             }
@@ -74,4 +80,24 @@ func extractParameters(rawURL, replaceWith string) map[string]string {
         }
     }
     return params
+}
+
+func GrepSubdomains(urls []string, configs []*config.Data) {
+    for _, rawURL := range urls {
+
+        parsedURL, err := url.Parse(rawURL) 
+        if err != nil {
+            continue
+        }
+
+        for _, cfg := range configs {
+            if cfg.Part == types.Subdomain.String() {
+                for _, subName := range cfg.List {
+                    if strings.Contains(parsedURL.Host, subName) {
+                        fmt.Println(parsedURL)
+                    }
+                }
+            }
+        }
+    }
 }

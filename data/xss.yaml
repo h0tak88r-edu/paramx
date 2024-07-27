@@ -1,6 +1,8 @@
-bug_type: "XSS"
+tag: XSS
 
-parameters:
+part: query
+
+list:
   - api
   - api_key
   - begindate

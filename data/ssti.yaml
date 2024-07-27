@@ -1,5 +1,7 @@
-bug_type: "SSTI"
-parameters:
+tag: SSTI
+part: query
+
+list:
  - activity
   - content
   - id
