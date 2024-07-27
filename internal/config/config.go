@@ -1,7 +1,6 @@
 package config
 
 import (
-	"log"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -68,13 +67,13 @@ func LoadConfig(configDir string) ([]*Data, error) {
         if filepath.Ext(file.Name()) == ".yaml" {
             configData, err := os.ReadFile(filepath.Join(configDir, file.Name()))
             if err != nil {
-                log.Printf("error reading file: %v", err)
+                logger.ERROR("error reading file: %v", err)
                 continue
             }
 
             var data Data
             if err := yaml.Unmarshal(configData, &data); err != nil {
-                log.Printf("error unmarshaling file: %v", err)
+                logger.ERROR("error unmarshaling file: %v", err)
                 continue
             }
 

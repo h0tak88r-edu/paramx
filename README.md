@@ -1,71 +1,116 @@
-# URL Utility Extractor (paramx)
+# ParamX README
 
-This command-line tool, `paramx`, is designed to extract URLs from a file based on specified bug types. It supports various bug types including XSS, SQLi, LFI, RCE, IDOR, SSRF, SSTI, redirect and more.
+## Overview
+
+ParamX is a tool designed for extracting interesting subdomains and parameters from URLs. It can be particularly useful for security researchers and penetration testers who are looking for specific types of vulnerabilities such as XSS, SQLi, LFI, RCE, IDOR, SSRF, SSTI, and open redirects.
 
 ## Features
 
-- Extract URLs based on bug types
-- Supports multiple bug types: XSS, SQLi, LFI, RCE, IDOR, SSRF, SSTI, and redirect
-- Replace parameter values with custom values
-- Add custom templates using the `-tp` flag
+- Extracts parameters based on specified bug types.
+- Supports custom templates.
+- Can update and download YAML configuration templates.
+- Processes URLs from files or standard input.
+- Custom parameter value replacement.
 
 ## Installation
 
-1. Clone the repository:
-    ```sh
-    git clone https://github.com/zomasec/paramx.git
-    cd paramx
-    ```
+To install ParamX:
 
-2. Build the tool:
-    ```sh
-    go build -o paramx
-    ```
+```sh
+go install github.com/zomasec/paramx/cmd/paramx
+
+```
 
 ## Usage
 
-To use the tool, run the executable with the appropriate flags:
+ParamX is executed via command-line interface (CLI) with several options to customize its behavior. Below are the available flags:
 
-```sh
-./paramx -tp <TempletesPath> -l <FileInput> -t <BugType> -rw <ReplaceWith>
-```
-
-### Flags
-
-- `-tp` : Directory where YAML configuration files are located. You can use the default templates from [paramx-templetes](https://github.com/zomasec/paramx-templetes) or specify your own.
-- `-l`  : Path to a file containing URLs (one per line)
-- `-t`  : The type of bug to extract the URLs based on it (xss, sqli, lfi, rce, idor, ssrf, ssti, redirect)
-- `-rw` : Replace the parameter value with a custom value
+- `-tp` : Directory where YAML configuration files are located.
+- `-l` : Path to a file containing URLs (one per line).
+- `-tag` : The type of bug to extract the URLs based on it (default: "xss"). Supported values: xss, sqli, lfi, rce, idor, ssrf, ssti, redirect.
+- `-rw` : Replace the parameter value with a custom value.
+- `-t` : Path to a custom template.
+- `-ut` : Update the templates.
 
 ### Examples
 
-1. Extract URLs for XSS bugs using default templates:
-    ```sh
-    ./paramx -tp ./configs -l urls.txt -t xss
-    ```
+#### Basic Usage
 
-2. Extract URLs for SQLi bugs and replace parameter values with `' OR '1'='1`:
-    ```sh
-    ./paramx -tp ./configs -l urls.txt -t sqli -rw "' OR '1'='1"
-    ```
+To extract XSS parameters from a list of URLs provided in a file:
 
-3. Use custom templates directory:
-    ```sh
-    ./paramx -tp /path/to/custom/templates -l urls.txt -t ssrf
-    ```
+```sh
+cat urls.txt | paramx -tag xss
+```
 
-## Templates
+#### Using Custom Template
 
-The default templates are available at [paramx-templetes](https://github.com/zomasec/paramx-templetes). Users can add their own templates by specifying the `-tp` flag with the path to the custom templates directory.
+To use a custom template for extraction:
+
+```sh
+cat urls.txt | paramx -t /path/to/custom_template.yaml  
+```
+
+#### Replacing Parameter Values
+
+To replace the parameter value with a custom value:
+
+```sh
+paramx -rw "custom_value" -l urls.txt
+```
+
+#### Updating Templates
+
+To update the YAML configuration templates:
+
+```sh
+paramx -ut
+```
 
 ## Contributing
 
-Contributions are welcome! Please submit a pull request or open an issue to discuss any changes.
+Contributions are welcome! Please fork the repository and submit pull requests.
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the MIT License. See the `LICENSE` file for details.
+
+## Contact
+
+For issues, questions, or suggestions, please open an issue on the [GitHub repository](https://github.com/zomasec/paramx).
 
 ---
 
-For more information, visit the [repository](https://github.com/zomasec/paramx).
+### Detailed Example
+
+Here’s a more detailed example of how you might run ParamX with various options:
+
+```sh
+paramx -tp /path/to/templates -l urls.txt -tag sqli -rw "injected_value" -t /path/to/custom_template.yaml
+```
+
+In this example, ParamX will:
+
+1. Use templates from `/path/to/templates`.
+2. Read URLs from `urls.txt`.
+3. Extract parameters that are prone to SQL injection.
+4. Replace parameter values with `injected_value`.
+5. Use a custom template located at `/path/to/custom_template.yaml`.
+
+## Internal Structure
+
+The main package imports necessary modules and handles command-line flag definitions and parsing. The core functionalities include:
+
+1. **Template Handling**:
+   - Updating and downloading YAML configuration templates.
+2. **URL Reading**:
+   - Reading URLs from a file or standard input.
+3. **Parameter Grepping**:
+   - Extracting parameters based on specified tags.
+4. **Logging**:
+   - Logging important information and errors.
+
+The `runner` package contains the main logic for parameter extraction, while the `utils` package includes utility functions for reading URLs and handling I/O operations.
+
+---
+
+Thank you for using ParamX! We hope this tool aids you in your security research and penetration testing endeavors. For more information, visit our [GitHub repository](https://github.com/zomasec/paramx).
