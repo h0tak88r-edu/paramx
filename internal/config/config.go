@@ -11,6 +11,19 @@ import (
 )
 
 
+type TemplateType int8
+
+const (
+    Subdomain TemplateType = iota
+    Path
+    Query
+
+)
+
+
+func (t TemplateType) String() string {
+    return [...]string{"subdomain", "path", "query"}[t]
+}
 
 var logger = logz.DefaultLogs()
 
@@ -18,8 +31,9 @@ var TempletesPath = filepath.Join(os.Getenv("HOME"), "paramx-templetes")
 
 
 type Data struct {
-    BugType    string   `yaml:"bug_type"`
-    Parameters []string `yaml:"parameters"`
+    Tag    string   `yaml:"tag"`
+    Part  string   `yaml:"part"` // subdomain, path, query
+    List []string `yaml:"list"`
 }
 
 // Check config path

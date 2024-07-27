@@ -5,7 +5,7 @@ package runner
 type Options struct {
 	URLs         []string // URLs is a list of target URLs.
 	TempletesPath string   // TempletesPath is the path to the templates directory.
-	BugType      string   // BugType is the type of bug to be injected.
+	Tag      string   	  // Tag is the type of bug to be injected.
 	FileInput    string   // FileInput is the path to the input file.
 	ReplaceWith  string   // ReplaceWith is the string to replace the bug with.
 	CustomTemplete string // CustomTemplete is the path to the custom templete.

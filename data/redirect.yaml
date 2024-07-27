@@ -1,5 +1,7 @@
-bug_type: "Redirect"
-parameters:
+tag: Redirect
+part: query
+
+list:
   - Lmage_url: 
   - Open: 
   - callback: 
