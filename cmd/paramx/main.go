@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"os"
 
 	"github.com/zomasec/logz"
 
@@ -24,16 +25,13 @@ func init() {
 func main() {
 	flag.Parse()
 
-	// Validate required flags
-	if opts.TempletesPath == "" {
-		logger.FATAL("Templates path (-tp) is required")
-	}
-
+	
 	// Read URLs from file if provided
 	if opts.FileInput != "" {
 		urls, err := utils.ReadURLsFromFile(opts.FileInput)
 		if err != nil {
 			logger.FATAL("Failed to read URLs from file: %v", err)
+			os.Exit(1)
 		}
 		opts.URLs = urls
 	} else {
@@ -41,6 +39,7 @@ func main() {
 		urls, err := utils.ReadURLsFromStdin()
 		if err != nil {
 			logger.FATAL("Failed to read URLs from stdin or no provided input: %v", err)
+			os.Exit(1)
 		}
 		opts.URLs = urls
 	}
