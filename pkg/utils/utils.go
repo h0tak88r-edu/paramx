@@ -3,7 +3,6 @@ package utils
 import (
 	"bufio"
 	"os"
-	"strings"
 
 	"github.com/zomasec/logz"
 )
@@ -21,11 +20,22 @@ func ReadFile(filePath string) ([]byte, error) {
 
 // readURLsFromFile reads URLs from a file, one URL per line
 func ReadURLsFromFile(filePath string) ([]string, error) {
-    data, err := os.ReadFile(filePath)
+    file, err := os.Open(filePath)
     if err != nil {
         return nil, err
     }
-    return strings.Split(strings.TrimSpace(string(data)), "\n"), nil
+
+    var urls []string
+
+    scanner := bufio.NewScanner(file)
+
+    for scanner.Scan() {
+        if scanner.Text() != "" {
+            urls = append(urls, scanner.Text())
+        }
+    }
+
+    return urls, nil
 }
 
 // readURLsFromStdin reads URLs from standard input
