@@ -40,7 +40,7 @@ func main() {
 		// If no file is provided, read URLs from stdin
 		urls, err := utils.ReadURLsFromStdin()
 		if err != nil {
-			logger.FATAL("Failed to read URLs from stdin: %v", err)
+			logger.FATAL("Failed to read URLs from stdin or no provided input: %v", err)
 		}
 		opts.URLs = urls
 	}
