@@ -17,7 +17,7 @@ ParamX is a tool designed for extracting interesting subdomains and parameters f
 To install ParamX:
 
 ```sh
-go install github.com/zomasec/paramx/cmd/paramx
+go install github.com/zomasec/paramx/cmd/paramx@latest
 
 ```
 
