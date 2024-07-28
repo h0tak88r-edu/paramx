@@ -1,4 +1,4 @@
-module paramx
+module github.com/zomasec/paramx
 
 go 1.22.5
 

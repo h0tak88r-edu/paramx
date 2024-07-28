@@ -6,8 +6,8 @@ import (
 
 	"github.com/zomasec/logz"
 
-	"paramx/internal/runner"
-	"paramx/pkg/utils"
+	"github.com/zomasec/paramx/internal/runner"
+	"github.com/zomasec/paramx/pkg/utils"
 )
 
 var opts = &runner.Options{}
@@ -25,7 +25,6 @@ func init() {
 func main() {
 	flag.Parse()
 
-	
 	// Read URLs from file if provided
 	if opts.FileInput != "" {
 		urls, err := utils.ReadURLsFromFile(opts.FileInput)
