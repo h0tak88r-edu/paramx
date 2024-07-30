@@ -1,12 +1,14 @@
 package runner
 
 import (
+	"fmt"
 	"os"
 
 	"github.com/zomasec/logz"
 
 	"github.com/zomasec/paramx/internal/config"
 	"github.com/zomasec/paramx/pkg/grep"
+	"github.com/zomasec/paramx/pkg/utils"
 )
 
 var logger = logz.DefaultLogs()
@@ -43,7 +45,12 @@ func Run(opts *Options) {
 	case "isubs":
 		grep.GrepSubdomains(opts.URLs, configs)
 	default:
-		grep.GrepParameters(opts.URLs, configs, opts.Tag, opts.ReplaceWith)
+		result := utils.RemoveDuplicates(grep.GrepParameters(opts.URLs, configs, opts.Tag, opts.ReplaceWith))
+	
+		for _, r := range result {
+			fmt.Fprintln(os.Stdout, r)
+		}	
+	
 	}
 
 }

@@ -31,7 +31,7 @@ func isTypeExist(tag string, types []string) bool {
 // - configs: A slice of *config.Data representing the configurations to use for parameter extraction.
 // - tag: A string representing the bug type to search for.
 // - replaceWith: A string representing the replacement value for the found parameters.
-func GrepParameters(urls []string, configs []*config.Data, tag, replaceWith string) {
+func GrepParameters(urls []string, configs []*config.Data, tag, replaceWith string) []string {
 	tags := []string{}
 
 	for _, cfg := range configs {
@@ -42,6 +42,8 @@ func GrepParameters(urls []string, configs []*config.Data, tag, replaceWith stri
 		logger.FATAL("Invalid tag , please add a valid tag like (xss, ssrf, sqli, lfi, rce, idor, ssti, redirect, isubs)")
 		os.Exit(1)
 	}
+
+	result := []string{}
 
 	for _, rawURL := range urls {
 		params, fullURL := extractParameters(rawURL, replaceWith)
@@ -57,12 +59,14 @@ func GrepParameters(urls []string, configs []*config.Data, tag, replaceWith stri
 				if strings.EqualFold(cfg.Tag, tag) {
 
 					if _, exists := params[param]; exists {
-						fmt.Println(fullURL)
+						result = append(result, fullURL)
 					}
 				}
 			}
 		}
 	}
+
+	return result
 }
 
 func extractParameters(rawURL, replaceWith string) (map[string]string, string) {
