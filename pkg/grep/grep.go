@@ -44,7 +44,7 @@ func GrepParameters(urls []string, configs []*config.Data, tag, replaceWith stri
 	}
 
 	for _, rawURL := range urls {
-		params := extractParameters(rawURL, replaceWith)
+		params, fullURL := extractParameters(rawURL, replaceWith)
 
 		for _, cfg := range configs {
 
@@ -57,7 +57,7 @@ func GrepParameters(urls []string, configs []*config.Data, tag, replaceWith stri
 				if strings.EqualFold(cfg.Tag, tag) {
 
 					if _, exists := params[param]; exists {
-						fmt.Println(rawURL)
+						fmt.Println(fullURL)
 					}
 				}
 			}
@@ -65,20 +65,29 @@ func GrepParameters(urls []string, configs []*config.Data, tag, replaceWith stri
 	}
 }
 
-func extractParameters(rawURL, replaceWith string) map[string]string {
+func extractParameters(rawURL, replaceWith string) (map[string]string, string) {
 	parsedURL, err := url.Parse(rawURL)
 	if err != nil {
-		return nil
+		return nil, ""
 	}
-	params := make(map[string]string)
-	for key, values := range parsedURL.Query() {
-		if replaceWith != "" {
-			params[key] = replaceWith
-		} else {
-			params[key] = values[0]
+
+	if parsedURL.RawQuery != "" {
+		query := parsedURL.Query()
+		for key := range query {
+			query.Set(key, replaceWith)
 		}
+	
+		parsedURL.RawQuery = query.Encode()
 	}
-	return params
+
+
+	params := make(map[string]string)
+
+	for key, values := range parsedURL.Query() {	
+		params[key] = values[0]
+	}
+	
+	return params, parsedURL.String()
 }
 
 func GrepSubdomains(urls []string, configs []*config.Data) {
