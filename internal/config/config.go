@@ -34,7 +34,7 @@ type Data struct {
 
 func DownloadTempletes() error {
 	if _, err := os.Stat(TempletesPath); os.IsNotExist(err) {
-		logger.INFO("Templates directory does not exist. Cloning repository...")
+		logify.Infof("Templates directory does not exist. Cloning repository...")
 		cmd := exec.Command("git", "clone", "https://github.com/cyinnove/paramx-templates.git", TempletesPath)
 		err := cmd.Run()
 		if err != nil {

@@ -1,7 +1,5 @@
-github.com/cyinnove/logify v1.0.3 h1:Ij9k1TSwa0R2vLMd0CBsxdyjPgw8qNEwyfLrYDfuAVU=
-github.com/cyinnove/logify v1.0.3/go.mod h1:GMwsVBd6CP2BHWagttCnVhjT5v5aXj9dCb7EsiWXRts=
-github.com/zomasec/logz v1.0.1 h1:PEsvpKiD6+eEZ/cH3s9xD/Xpkdp6+k30p2cSssgfUms=
-github.com/zomasec/logz v1.0.1/go.mod h1:unQ4xwWC2PIGqPchN1dOX10tnWqecsmEj9Gh7pCvsaQ=
+github.com/cyinnove/logify v1.0.4 h1:rEyGioKkIK6P8ViFnHxDFkNcRzwKDU7eHY8pLAUy/Mo=
+github.com/cyinnove/logify v1.0.4/go.mod h1:GMwsVBd6CP2BHWagttCnVhjT5v5aXj9dCb7EsiWXRts=
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405 h1:yhCVgyC4o1eVCa2tZl7eS0r+SDo693bJlVdllGtEeKM=
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=
 gopkg.in/yaml.v3 v3.0.1 h1:fxVm/GzAzEWqLHuvctI91KS9hhNmmWOoWu0XTYJS7CA=
