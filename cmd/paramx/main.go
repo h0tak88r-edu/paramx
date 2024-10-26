@@ -7,6 +7,7 @@ import (
 	"github.com/cyinnove/logify"
 	"github.com/cyinnove/paramx/internal/runner"
 	"github.com/cyinnove/paramx/pkg/utils"
+	"github.com/cyinnove/paramx/internal/config" // Import the config package
 )
 
 var opts = &runner.Options{}
@@ -17,10 +18,13 @@ func init() {
 	flag.StringVar(&opts.Tag, "tag", "xss", "The type of bug to extract the URLs based on it (default: \"xss\"). Supported values: xss, sqli, lfi, rce, idor, ssrf, ssti, redirect.")
 	flag.StringVar(&opts.ReplaceWith, "rw", "", "Replace the parameter value with a custom value.")
 	flag.StringVar(&opts.CustomTemplete, "t", "", "Path to a custom template.")
-
 }
 
 func main() {
+	// Display banner
+	config.Banner()
+
+	// Parse command-line flags
 	flag.Parse()
 
 	// Read URLs from file if provided
@@ -41,6 +45,6 @@ func main() {
 		opts.URLs = urls
 	}
 
+	// Run the tool
 	runner.Run(opts)
-
 }
