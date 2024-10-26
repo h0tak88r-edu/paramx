@@ -146,7 +146,7 @@ The `runner` package contains the main logic for parameter extraction, while the
 ## TODO
 
 - add more custmization to match any part of url
-- add ability to match any part using regex 
+- add ability to match any part using regex
 
 ---
 
