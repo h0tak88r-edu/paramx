@@ -10,4 +10,5 @@ type Options struct {
 	ReplaceWith  string   // ReplaceWith is the string to replace the bug with.
 	CustomTemplete string // CustomTemplete is the path to the custom templete.
 	UpdateTempletes bool   // UpdateTempletes is a flag to update the templetes.
+	OutputFile  string   // OutputFile is the path to the output file.
 }

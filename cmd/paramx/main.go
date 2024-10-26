@@ -18,6 +18,7 @@ func init() {
 	flag.StringVar(&opts.Tag, "tag", "xss", "The type of bug to extract the URLs based on it (default: \"xss\"). Supported values: xss, sqli, lfi, rce, idor, ssrf, ssti, redirect.")
 	flag.StringVar(&opts.ReplaceWith, "rw", "", "Replace the parameter value with a custom value.")
 	flag.StringVar(&opts.CustomTemplete, "t", "", "Path to a custom template.")
+	flag.StringVar(&opts.OutputFile, "o", "", "Path to a file where the results should be saved.")
 }
 
 func main() {

@@ -51,6 +51,13 @@ func Run(opts *Options) {
 		
 		logify.Infof("Found %d interesting subdomains", len(result))
 
+		if opts.OutputFile != "" {
+			if err := utils.OutputTextResult(result, opts.OutputFile ); err != nil {
+				logify.Fatalf("Error writing to file: %s\n", err.Error())
+			}
+			logify.Infof("Subdomains saved to %s", opts.OutputFile)
+		}
+
 	default:
 		logify.Infof("Starting getting parameters from %d urls for tag %s", len(opts.URLs), opts.Tag)
 
@@ -61,6 +68,13 @@ func Run(opts *Options) {
 		}
 
 		logify.Infof("Found %d parameter with tag %s", len(result), opts.Tag)
+
+		if opts.OutputFile != "" {
+			if err := utils.OutputTextResult(result, opts.OutputFile ); err != nil {
+				logify.Fatalf("Error writing to file: %s\n", err.Error())
+			}
+			logify.Infof("URLs saved to %s", opts.OutputFile)
+		}
 
 	}
 

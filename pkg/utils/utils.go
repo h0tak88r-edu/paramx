@@ -72,3 +72,24 @@ func RemoveDuplicates(elements []string) []string {
     // Return the new slice.
     return result
 }
+
+func OutputTextResult(result []string, outFile string) error {
+    
+    result = RemoveDuplicates(result)
+
+    file, err := os.Create(outFile)
+    if err != nil {
+        return err
+    }
+    defer file.Close()
+    
+    for _, url := range result {
+        _, err = file.WriteString(url + "\n")
+        if err != nil {
+            return err
+        }
+    }
+    
+ 
+    return nil
+}
