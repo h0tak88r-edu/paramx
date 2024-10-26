@@ -31,20 +31,23 @@ type Data struct {
 }
 
 // Check config path
-
 func DownloadTempletes() error {
-	if _, err := os.Stat(TempletesPath); os.IsNotExist(err) {
-		logify.Infof("Templates directory does not exist. Cloning repository...")
-		cmd := exec.Command("git", "clone", "https://github.com/cyinnove/paramx-templates.git", TempletesPath)
-		err := cmd.Run()
-		if err != nil {
-			return err
-		}
-		logify.Infof("Param Templetes installed successfully.")
-		return nil
-	}
+    if _, err := exec.LookPath("git"); err != nil {
+        return fmt.Errorf("git is not installed or not found in PATH")
+    }
 
-	return nil
+    if _, err := os.Stat(TempletesPath); os.IsNotExist(err) {
+        logify.Infof("Templates directory does not exist. Cloning repository...")
+        cmd := exec.Command("git", "clone", "https://github.com/cyinnove/paramx-templates.git", TempletesPath)
+        err := cmd.Run()
+        if err != nil {
+            return err
+        }
+        logify.Infof("Param Templetes installed successfully.")
+        return nil
+    }
+
+    return nil
 }
 
 // LoadConfig loads configuration files from the specified directory and returns a slice of Data objects.
