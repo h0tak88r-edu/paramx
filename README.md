@@ -152,4 +152,4 @@ The `runner` package contains the main logic for parameter extraction, while the
 
 - We are inviting the cyber security community to contribute on our open source project to make it better
 
-Thank you for using ParamX! We hope this tool aids you in your recon process. For more information, visit our [GitHub repository](https://github.com/cyinnove/paramx).
+Thank you for using ParamX! We hope this tool aids you in your recon process. For more information, visit our [GitHub repository](https://github.com/cyinnove/paramx). 
