@@ -4,7 +4,7 @@
   <a href="https://twitter.com/intent/follow?screen_name=zomasec"><img src="https://img.shields.io/twitter/follow/zomasec?style=flat&logo=x"></a>
 </p>
 <p align="center">
-    <img src="./static/paramx-logo.png" width="300"> <!-- Adjust the width as needed -->
+    <img src="./static/paramx-logo.png" hight="100" width="300"> <!-- Adjust the width as needed -->
 </p>
 
 
