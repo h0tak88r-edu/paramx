@@ -39,18 +39,28 @@ func Run(opts *Options) {
 
 	}
 
+
 	switch opts.Tag {
 	case "isubs":
+		logify.Infof("Starting getting intersting subdomains from %d subdomains", len(opts.URLs), opts.Tag)
+
 		result := utils.RemoveDuplicates(grep.GrepSubdomains(opts.URLs, configs))
 		for _, r := range result {
 			fmt.Fprintln(os.Stdout, r)
 		}
+		
+		logify.Infof("Found %d interesting subdomains", len(result))
+
 	default:
+		logify.Infof("Starting getting parameters from %d urls for tag %s", len(opts.URLs), opts.Tag)
+
 		result := utils.RemoveDuplicates(grep.GrepParameters(opts.URLs, configs, opts.Tag, opts.ReplaceWith))
 
 		for _, r := range result {
 			fmt.Fprintln(os.Stdout, r)
 		}
+
+		logify.Infof("Found %d parameter with tag %s", len(result), opts.Tag)
 
 	}
 
