@@ -1,8 +1,8 @@
-# ParamX README
-
 ## Overview
 
-ParamX is a tool designed for extracting interesting subdomains and parameters from URLs. It can be particularly useful for security researchers and penetration testers who are looking for specific types of vulnerabilities such as XSS, SQLi, LFI, RCE, IDOR, SSRF, SSTI, and open redirects.
+ParamX is a tool designed for extracting interesting subdomains and parameters from URLs. It can be particularly useful for bug hunters and penetration testers who are looking for specific types of vulnerabilities such as XSS, SQLi, LFI, RCE, IDOR, SSRF, SSTI, and open redirects.
+
+- inspired from [gf](https://github.com/tomnomnom/gf) by tomnomnom but edited with more clean code and easy configuration using yaml templates
 
 ## Features
 
@@ -11,6 +11,22 @@ ParamX is a tool designed for extracting interesting subdomains and parameters f
 - Can update and download YAML configuration templates.
 - Processes URLs from files or standard input.
 - Custom parameter value replacement.
+- Easy configuration using yaml templates not json like gf
+
+## Templates
+- You can find our written templates here [paramx-tempalets](https://github.com/cyinnove/paramx-templates) or you can create your own , it's so easy to do
+-the syntax is basic
+```
+tag: {{TAG_NAME}} // xss,sqli,ssrf, as you want you can create your own
+part: {{PART_NAME}} // query,subdomain, ... will add new parts in z future
+
+list:
+  - param1
+  - param2
+  - param2
+```
+
+
 
 ## Installation
 
@@ -41,6 +57,10 @@ To extract XSS parameters from a list of URLs provided in a file:
 ```sh
 cat urls.txt | paramx -tag xss
 ```
+
+This will show output like :
+
+![poc.png](/static/poc.png)
 
 #### Using Custom Template
 
@@ -112,5 +132,13 @@ The main package imports necessary modules and handles command-line flag definit
 The `runner` package contains the main logic for parameter extraction, while the `utils` package includes utility functions for reading URLs and handling I/O operations.
 
 ---
+## TODO
 
-Thank you for using ParamX! We hope this tool aids you in your security research and penetration testing endeavors. For more information, visit our [GitHub repository](https://github.com/cyinnove/paramx).
+- add more custmization to match any part of url
+- add ability to match any part using regex 
+
+---
+
+- We are inviting the cyber security community to contribute on our open source project to make it better
+
+Thank you for using ParamX! We hope this tool aids you in your recon process. For more information, visit our [GitHub repository](https://github.com/cyinnove/paramx).
