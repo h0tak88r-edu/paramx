@@ -3,16 +3,15 @@ package utils
 import (
 	"bufio"
 	"os"
+    "github.com/cyinnove/logify"
 
-	"github.com/zomasec/logz"
 )
 
-var logger = logz.DefaultLogs()
 
 func ReadFile(filePath string) ([]byte, error) {
     data, err := os.ReadFile(filePath)
     if err != nil {
-        logger.ERROR("error reading file: %s", err.Error())
+        logify.Errorf("error reading file: %s", err.Error())
         return nil, err
     }
     return data, nil

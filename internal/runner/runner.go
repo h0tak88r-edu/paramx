@@ -4,21 +4,19 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/zomasec/logz"
+	"github.com/cyinnove/logify"
 
-	"github.com/zomasec/paramx/internal/config"
-	"github.com/zomasec/paramx/pkg/grep"
-	"github.com/zomasec/paramx/pkg/utils"
+	"github.com/cyinnove/paramx/internal/config"
+	"github.com/cyinnove/paramx/pkg/grep"
+	"github.com/cyinnove/paramx/pkg/utils"
 )
-
-var logger = logz.DefaultLogs()
 
 // Run executes the main logic of the program.
 // It downloads templates, loads configurations, and performs parameter replacement.
 func Run(opts *Options) {
 
 	if err := config.DownloadTempletes(); err != nil {
-		logger.ERROR("Failed to clone repository: %s\n", err.Error())
+		logify.Errorf("Failed to clone repository: %s\n", err.Error())
 		os.Exit(1)
 	}
 
@@ -34,7 +32,7 @@ func Run(opts *Options) {
 	if opts.CustomTemplete != "" {
 		date, err := config.ReadCustomTemplete(opts.CustomTemplete)
 		if err != nil {
-			logger.ERROR("Error reading custom templete the syntax is invalid : %s\n", err.Error())
+			logify.Errorf("Error reading custom templete the syntax is invalid : %s\n", err.Error())
 			os.Exit(1)
 		}
 		configs = append(configs, date)
@@ -43,14 +41,17 @@ func Run(opts *Options) {
 
 	switch opts.Tag {
 	case "isubs":
-		grep.GrepSubdomains(opts.URLs, configs)
-	default:
-		result := utils.RemoveDuplicates(grep.GrepParameters(opts.URLs, configs, opts.Tag, opts.ReplaceWith))
-	
+		result := utils.RemoveDuplicates(grep.GrepSubdomains(opts.URLs, configs))
 		for _, r := range result {
 			fmt.Fprintln(os.Stdout, r)
-		}	
-	
+		}
+	default:
+		result := utils.RemoveDuplicates(grep.GrepParameters(opts.URLs, configs, opts.Tag, opts.ReplaceWith))
+
+		for _, r := range result {
+			fmt.Fprintln(os.Stdout, r)
+		}
+
 	}
 
 }

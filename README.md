@@ -17,7 +17,7 @@ ParamX is a tool designed for extracting interesting subdomains and parameters f
 To install ParamX:
 
 ```sh
-go install github.com/zomasec/paramx/cmd/paramx@latest
+go install github.com/cyinnove/paramx/cmd/paramx@latest
 
 ```
 
@@ -76,7 +76,7 @@ This project is licensed under the MIT License. See the `LICENSE` file for detai
 
 ## Contact
 
-For issues, questions, or suggestions, please open an issue on the [GitHub repository](https://github.com/zomasec/paramx).
+For issues, questions, or suggestions, please open an issue on the [GitHub repository](https://github.com/cyinnove/paramx).
 
 ---
 
@@ -113,4 +113,4 @@ The `runner` package contains the main logic for parameter extraction, while the
 
 ---
 
-Thank you for using ParamX! We hope this tool aids you in your security research and penetration testing endeavors. For more information, visit our [GitHub repository](https://github.com/zomasec/paramx).
+Thank you for using ParamX! We hope this tool aids you in your security research and penetration testing endeavors. For more information, visit our [GitHub repository](https://github.com/cyinnove/paramx).

@@ -1,18 +1,14 @@
 package grep
 
 import (
-	"fmt"
 	"net/url"
-	"os"
 	"strings"
 
-	"github.com/zomasec/logz"
-
-	"github.com/zomasec/paramx/internal/config"
-	"github.com/zomasec/paramx/pkg/types"
+	"github.com/cyinnove/logify"
+	"github.com/cyinnove/paramx/internal/config"
+	"github.com/cyinnove/paramx/pkg/types"
 )
 
-var logger = logz.DefaultLogs()
 
 func isTypeExist(tag string, types []string) bool {
 	for _, t := range types {
@@ -39,8 +35,7 @@ func GrepParameters(urls []string, configs []*config.Data, tag, replaceWith stri
 	}
 
 	if !isTypeExist(tag, tags) {
-		logger.FATAL("Invalid tag , please add a valid tag like (xss, ssrf, sqli, lfi, rce, idor, ssti, redirect, isubs)")
-		os.Exit(1)
+		logify.Fatalf("Invalid tag , please add a valid tag like (xss, ssrf, sqli, lfi, rce, idor, ssti, redirect, isubs)")
 	}
 
 	result := []string{}
@@ -80,36 +75,33 @@ func extractParameters(rawURL, replaceWith string) (map[string]string, string) {
 		for key := range query {
 			query.Set(key, replaceWith)
 		}
-	
+
 		parsedURL.RawQuery = query.Encode()
 	}
 
-
 	params := make(map[string]string)
 
-	for key, values := range parsedURL.Query() {	
+	for key, values := range parsedURL.Query() {
 		params[key] = values[0]
 	}
-	
+
 	return params, parsedURL.String()
 }
 
-func GrepSubdomains(urls []string, configs []*config.Data) {
-	for _, rawURL := range urls {
-
-		parsedURL, err := url.Parse(rawURL)
-		if err != nil {
-			continue
-		}
+func GrepSubdomains(urls []string, configs []*config.Data) []string {
+	result := []string{}
+	for _, sub := range urls {
 
 		for _, cfg := range configs {
 			if cfg.Part == types.Subdomain.String() {
 				for _, subName := range cfg.List {
-					if strings.Contains(parsedURL.Host, subName) {
-						fmt.Println(parsedURL)
+					if strings.Contains(sub, subName) {
+						result = append(result, sub)
 					}
 				}
 			}
 		}
 	}
+
+	return result
 }
