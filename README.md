@@ -1,3 +1,8 @@
+<p align="center">
+  <a href="https://pkg.go.dev/github.com/cyinnove/paramx/pkg/paramx"><img src="https://pkg.go.dev/badge/github.com/cyinnove/paramx.svg"></a>
+  <a href="https://goreportcard.com/report/github.com/cyinnove/paramx"><img src="https://goreportcard.com/badge/github.com/cyinnove/paramx"></a> 
+  <a href="https://twitter.com/intent/follow?screen_name=zomasec"><img src="https://img.shields.io/twitter/follow/zomasec?style=flat&logo=x"></a>
+</p>
 ## Overview
 
 ParamX is a tool designed for extracting interesting subdomains and parameters from URLs. It can be particularly useful for bug hunters and penetration testers who are looking for specific types of vulnerabilities such as XSS, SQLi, LFI, RCE, IDOR, SSRF, SSTI, and open redirects.
