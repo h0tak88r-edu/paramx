@@ -9,7 +9,7 @@
 ParamX is a tool designed for extracting interesting subdomains and parameters from URLs. It can be particularly useful for bug hunters and penetration testers who are looking for specific types of vulnerabilities such as XSS, SQLi, LFI, RCE, IDOR, SSRF, SSTI, and open redirects.
 
 <p align="center">
-    <img src="./static/paramx-logo.png" hight="100" width="300"> <!-- Adjust the width as needed -->
+    <img src="./static/paramx-logo.png" hight="100" width="300">
 </p>
 
 
